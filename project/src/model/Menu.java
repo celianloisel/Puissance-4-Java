@@ -1,13 +1,14 @@
 package model;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
+import model.Joueur;
 
 public class Menu {
 
     static String nom;
     static String couleur;
+    public static Joueur joueur01 = new Joueur();
 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
@@ -24,7 +25,7 @@ public class Menu {
             switch (choix) {
                 case "1":
                     menuSecondaire();
-                    System.out.println(Menu.couleur + Menu.nom);
+                    System.out.println(joueur01.couleurJoueur + joueur01.nomJoueur);
                     break;
                 case "2":
                     System.out.println("Jouer à 2");
@@ -63,7 +64,8 @@ public class Menu {
     private static void menuSecondaire(){
         demanderNom();
         menuCouleur();
-        System.out.println(Menu.couleur);
+        joueur01.nomJoueur = Menu.nom;
+        joueur01.couleurJoueur = Menu.couleur;
         return;
 
     }
@@ -86,9 +88,10 @@ public class Menu {
                     break;
                 default:
                     System.out.println("L'option n'existe pas !");
-                    break;
+                    if (Menu.couleur != "🟡" || Menu.couleur != "🔴" ){
+                        menuCouleur();
+                }
             }
-            System.out.println("La couleur que vous avez choisi est "+couleur);
             break;
         }
     }
@@ -104,4 +107,4 @@ public class Menu {
             System.out.println(s);
         }
     }
-    }
+}

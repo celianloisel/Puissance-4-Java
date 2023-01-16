@@ -1,5 +1,11 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+import model.Menu;
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello world!");
+
+    public static void main(String[] args) throws Exception {
+
+      Menu.menuPrincipal();
+
     }
 }

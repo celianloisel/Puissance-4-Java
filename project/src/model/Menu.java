@@ -1,13 +1,17 @@
 package model;
 
-import java.sql.SQLOutput;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import model.Joueur;
 
 public class Menu {
 
     static String nom;
     static String couleur;
+    public static Joueur joueur01 = new Joueur();
+    public static Joueur joueur02 = new Joueur();
+    public static Joueur joueur03 = new Joueur();
 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
@@ -23,11 +27,10 @@ public class Menu {
             String choix = scan01.nextLine();
             switch (choix) {
                 case "1":
-                    menuSecondaire();
-                    System.out.println(Menu.couleur + Menu.nom);
+                    menuSecondaireSolo();
                     break;
                 case "2":
-                    System.out.println("Jouer à 2");
+                    menuSecondaireDuo();
                     break;
                 case "3":
                     System.out.println("Afficher le TOP 10");
@@ -52,7 +55,7 @@ public class Menu {
         menus.add(ANSI_YELLOW + "3 ➥ Afficher le TOP 10" + ANSI_RESET);
 
         menus.add(ANSI_RED + "\nq ➥ Quitter" + ANSI_RESET);
-        menus.add(ANSI_YELLOW + "\n⸺⸺⸺⸺⸺⸺⸺⸺⸺⸺⸺\n" + ANSI_RESET);
+        menus.add(ANSI_YELLOW + "\n⸺⸺⸺⸺⸺⸺⸺⸺⸺⸺\n" + ANSI_RESET);
         for (String s : menus) {
             System.out.println(s);
         }
@@ -60,16 +63,40 @@ public class Menu {
 
 
 
-    private static void menuSecondaire(){
+    private static void menuSecondaireSolo(){
         demanderNom();
         menuCouleur();
-        System.out.println(Menu.couleur);
+        joueur01.nomJoueur = Menu.nom;
+        joueur01.couleurJoueur = Menu.couleur;
+        System.out.println("Bienvenue "+joueur01.nomJoueur+ " ! Votre couleur est "+joueur01.couleurJoueur+".");
         return;
 
     }
 
+    private static void menuSecondaireDuo(){
+        System.out.println("\n--- Saissisez les informations du joueur 1 ---\n");
+        demanderNom();
+        menuCouleur();
+        joueur02.nomJoueur = Menu.nom;
+        joueur02.couleurJoueur = Menu.couleur;
+        System.out.println("Bienvenue "+joueur02.nomJoueur+ " ! Votre couleur est "+joueur02.couleurJoueur+".");
+        System.out.println("\n--- Saissisez les informations du joueur 2 ---\n");
+        demanderNom();
+        choixCouleurDuo();
+        joueur03.nomJoueur = Menu.nom;
+        System.out.println("Bienvenue "+joueur03.nomJoueur+ " ! Votre couleur est donc le "+joueur03.couleurJoueur+".");
+
+    }
+
+    public static void choixCouleurDuo(){
+        if (Menu.couleur == "🟡"){
+            joueur03.couleurJoueur = "🔴";
+        }else{
+            joueur03.couleurJoueur = "🟡";
+        }
+    }
     public static void demanderNom() {
-        System.out.println("Saissisez le nom du joueur :");
+        System.out.println(">> Saissisez le nom du joueur :");
         Menu.nom = scan03.nextLine();
     }
 
@@ -86,17 +113,17 @@ public class Menu {
                     break;
                 default:
                     System.out.println("L'option n'existe pas !");
-                    break;
+                    if (Menu.couleur != "🟡" || Menu.couleur != "🔴" ){
+                        menuCouleur();
+                }
             }
-            System.out.println("La couleur que vous avez choisi est "+couleur);
             break;
         }
     }
 
-
     private static void afficherMenuCouleur() {
         ArrayList<String> menus2 = new ArrayList<>();
-        menus2.add("\nChoissisez votre couleur :\n");
+        menus2.add("\n>> Choissisez votre couleur :\n");
         menus2.add(ANSI_YELLOW + "1 ➥ 🟡" + ANSI_RESET);
         menus2.add(ANSI_YELLOW + "2 ➥ 🔴" + ANSI_RESET);
 
@@ -104,4 +131,5 @@ public class Menu {
             System.out.println(s);
         }
     }
-    }
+}
+

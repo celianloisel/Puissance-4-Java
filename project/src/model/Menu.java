@@ -3,6 +3,7 @@ package model;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import model.Grid;
 import model.Joueur;
 
 public class Menu {
@@ -69,7 +70,8 @@ public class Menu {
         joueur01.nomJoueur = Menu.nom;
         joueur01.couleurJoueur = Menu.couleur;
         System.out.println("Bienvenue "+joueur01.nomJoueur+ " ! Votre couleur est "+joueur01.couleurJoueur+".");
-        return;
+        Grid grid = new Grid(6, 7);
+        grid.display();
 
     }
 
@@ -85,7 +87,8 @@ public class Menu {
         choixCouleurDuo();
         joueur03.nomJoueur = Menu.nom;
         System.out.println("Bienvenue "+joueur03.nomJoueur+ " ! Votre couleur est donc le "+joueur03.couleurJoueur+".");
-
+        Grid grid = new Grid(6, 7);
+        grid.display();
     }
 
     public static void choixCouleurDuo(){

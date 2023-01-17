@@ -10,9 +10,6 @@ public class Menu {
 
     static String nom;
     static String couleur;
-    public static Joueur joueur01 = new Joueur();
-    public static Joueur joueur02 = new Joueur();
-    public static Joueur joueur03 = new Joueur();
 
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_RED = "\u001B[31m";
@@ -68,9 +65,10 @@ public class Menu {
     private static void menuSecondaireSolo(){
         demanderNom();
         menuCouleur();
-        joueur01.nomJoueur = Menu.nom;
-        joueur01.couleurJoueur = Menu.couleur;
-        System.out.println("Bienvenue "+joueur01.nomJoueur+ " ! Votre couleur est "+joueur01.couleurJoueur+".");
+        Joueur joueur = new Joueur(Menu.nom, Menu.couleur);
+        // joueur01.nomJoueur = Menu.nom;
+        // joueur01.couleurJoueur = Menu.couleur;
+        System.out.println("Bienvenue "+joueur.getNomJoueur()+ " ! Votre couleur est "+joueur.getCouleurJoueur()+".");
         Grid grid = new Grid(6, 7);
         grid.display();
 
@@ -80,25 +78,22 @@ public class Menu {
         System.out.println("\n--- Saissisez les informations du joueur 1 ---\n");
         demanderNom();
         menuCouleur();
-        joueur02.nomJoueur = Menu.nom;
-        joueur02.couleurJoueur = Menu.couleur;
-        System.out.println("Bienvenue "+joueur02.nomJoueur+ " ! Votre couleur est "+joueur02.couleurJoueur+".");
+        Joueur joueur01 = new Joueur(Menu.nom, Menu.couleur);
+        System.out.println("Bienvenue "+joueur01.getNomJoueur()+ " ! Votre couleur est "+joueur01.getCouleurJoueur()+".");
         System.out.println("\n--- Saissisez les informations du joueur 2 ---\n");
         demanderNom();
-        choixCouleurDuo();
-        joueur03.nomJoueur = Menu.nom;
-        System.out.println("Bienvenue "+joueur03.nomJoueur+ " ! Votre couleur est donc le "+joueur03.couleurJoueur+".");
+        if (joueur01.getCouleurJoueur() == "🟡"){
+            Menu.couleur = "🔴";
+        }else{
+            Menu.couleur = "🟡";
+        }
+        Joueur joueur02 = new Joueur(Menu.nom, Menu.couleur);
+        System.out.println("Bienvenue "+joueur02.getNomJoueur()+ " ! Votre couleur est donc le "+joueur02.getCouleurJoueur()+".");
         Grid grid = new Grid(6, 7);
         grid.display();
     }
 
-    public static void choixCouleurDuo(){
-        if (Menu.couleur == "🟡"){
-            joueur03.couleurJoueur = "🔴";
-        }else{
-            joueur03.couleurJoueur = "🟡";
-        }
-    }
+
     public static void demanderNom() {
         System.out.println(">> Saissisez le nom du joueur :");
         Menu.nom = scan03.nextLine();
@@ -136,4 +131,3 @@ public class Menu {
         }
     }
 }
-

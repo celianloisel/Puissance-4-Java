@@ -34,7 +34,8 @@ public class Menu {
                     menuSecondaireDuo();
                     break;
                 case "3":
-                    System.out.println("Afficher le TOP 10");
+                    Score topScore = new Score("project/src/score.csv");
+                    topScore.afficherContenu();
                     break;
                 case "q":
                     scan01.close();

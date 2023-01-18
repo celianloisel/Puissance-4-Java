@@ -8,7 +8,7 @@ public class Score {
 
     private String fileName;
 
-    public Score (String fileName) {
+    public Score(String fileName) {
         this.fileName = fileName;
     }
 
@@ -29,4 +29,3 @@ public class Score {
         }
     }
 }
-

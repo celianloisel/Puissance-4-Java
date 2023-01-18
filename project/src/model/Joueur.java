@@ -4,7 +4,7 @@ public class Joueur {
     private final String couleurJoueur;
     private final String nomJoueur;
 
-    public Joueur(String name, String color){
+    public Joueur(String name, String color) {
         this.nomJoueur = name;
         this.couleurJoueur = color;
     }

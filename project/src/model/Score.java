@@ -1,8 +1,6 @@
 package model;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class Score {
 
@@ -26,6 +24,13 @@ public class Score {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void saveScore(String name, int move) throws IOException {
+        int score = 42 - move;
+        try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(fileName, true)))) {
+            pw.println(name + ";" + score);
         }
     }
 }

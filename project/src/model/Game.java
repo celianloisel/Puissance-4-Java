@@ -1,5 +1,6 @@
 package model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
@@ -12,6 +13,7 @@ public class Game {
     private Player currentPlayer;
     private int numberOfPlayers;
     private int iaLevel;
+    private int move;
 
     public Game(int numberOfPlayers, ArrayList names, ArrayList colors, int iaLevel) {
         this.numberOfPlayers = numberOfPlayers;
@@ -31,7 +33,7 @@ public class Game {
         currentPlayer = player1;
     }
 
-    public void start() {
+    public void start() throws IOException {
         grid.displayGrid();
         System.out.println(currentPlayer.getName());
         System.out.println(currentPlayer.getColor());
@@ -43,11 +45,14 @@ public class Game {
             int column = getPlayerMove(false);
             grid.dropPiece(currentPlayer.getColor(), column);
             grid.displayGrid();
+            move++;
             if (!grid.checkForWin()) {
                 switchPlayer();
             }
         }
         System.out.println(currentPlayer.getName() + " a gagné!");
+        Score score = new Score("project/src/score.csv");
+        score.saveScore(currentPlayer.getName(), move);
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {

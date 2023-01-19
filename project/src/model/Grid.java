@@ -4,8 +4,8 @@ import static model.Menu.ANSI_RESET;
 import static model.Menu.ANSI_YELLOW;
 
 public class Grid {
-    private final int rows;
-    private final int columns;
+    final int rows;
+    final int columns;
     private Piece[][] grid;
 
     public Grid() {
@@ -127,5 +127,9 @@ public class Grid {
             }
         }
         return false;
+    }
+
+    public Object[][] getGrid() {
+        return grid;
     }
 }

@@ -72,16 +72,23 @@ public class Game {
             return col;
         } else {
             System.out.println("L'ia joue");
+            Random random = new Random();
+            int col = random.nextInt(7) + 1;
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            Random random = new Random();
-            int col = random.nextInt(7) + 1;
-            if (!checkColumn(col)) return getPlayerMove(false);
-            return col;
+            switch (iaLevel) {
+                case 1:
+                    if (!checkColumn(col)) return getPlayerMove(false);
+                    return col;
+                case 2:
+                    int choice = detectAndBlockWin(player1.getColor());
+                    return choice;
+            }
         }
+        return 0;
     }
 
     public boolean checkColumn(int col) {
@@ -100,4 +107,63 @@ public class Game {
             currentPlayer = player1;
         }
     }
+
+    public int detectAndBlockWin(String opponentColor) {
+        // vérifier les alignements horizontaux
+        for (int row = 0; row < grid.rows; row++) {
+            for (int col = 0; col < grid.columns - 2; col++) {
+                if (grid.getGrid()[row][col] == opponentColor && grid.getGrid()[row][col + 1] == opponentColor && grid.getGrid()[row][col + 2] == opponentColor) {
+                    if (col > 0 && !grid.isFull(col - 1)) {
+                        System.out.println("col");
+                        return col;
+                    }
+                    if (col + 3 < grid.columns && !grid.isFull(col + 3)) {
+                        return col + 3;
+                    }
+                }
+            }
+        }
+        // vérifier les alignements verticaux
+        for (int col = 0; col < grid.columns; col++) {
+            for (int rows = 0; rows < grid.rows - 2; rows++) {
+                if (grid.getGrid()[rows][col] == opponentColor && grid.getGrid()[rows + 1][col] == opponentColor && grid.getGrid()[rows + 2][col] == opponentColor) {
+                    if (rows > 0 && !grid.isFull(col)) {
+                        return col;
+                    }
+                }
+            }
+        }
+        // vérifier les alignements diagonaux
+        for (int rows = 0; rows < grid.rows - 2; rows++) {
+            for (int col = 0; col < grid.columns - 2; col++) {
+                if (grid.getGrid()[rows][col] == opponentColor && grid.getGrid()[rows + 1][col + 1] == opponentColor && grid.getGrid()[rows + 2][col + 2] == opponentColor) {
+                    if (col > 0 && rows > 0 && !grid.isFull(col - 1)) {
+                        return col - 1;
+                    }
+                    if (col + 3 < grid.columns && rows > 0 && !grid.isFull(col + 2)) {
+                        return col + 2;
+                    }
+                }
+            }
+        }
+        for (int rows = 0; rows < grid.rows - 2; rows++) {
+            for (int col = 2; col < grid.columns; col++) {
+                if (grid.getGrid()[rows][col] == opponentColor && grid.getGrid()[rows + 1][col - 1] == opponentColor && grid.getGrid()[rows + 2][col - 2] == opponentColor) {
+                    if (col - 3 >= 0 && rows > 0 && !grid.isFull(col - 3)) {
+                        return col - 3;
+                    }
+                    if (col < grid.columns - 1 && rows > 0 && !grid.isFull(col)) {
+                        return col;
+                    }
+                }
+            }
+        }
+
+        Random random = new Random();
+        int col2 = random.nextInt(7) + 1;
+        System.out.println("test");
+        return col2;
+    }
 }
+
+

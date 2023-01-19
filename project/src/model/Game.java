@@ -37,7 +37,7 @@ public class Game {
         System.out.println(currentPlayer.getColor());
         while (!grid.checkForWin()) {
             if (grid.isFullGrid()) {
-                System.out.println("Matche nul");
+                System.out.println("Match nul");
                 break;
             }
             int column = getPlayerMove(false);
@@ -60,7 +60,7 @@ public class Game {
             Scanner scan = new Scanner(System.in);
 
             if (error) {
-                System.out.println("le nombre choisis doit etre compris entre 1 et 7");
+                System.out.println("le nombre choisis doit être compris entre 1 et 7");
             }
             System.out.println("C'est à " + currentPlayer.getName() + " de jouer");
             System.out.println("Saisir la colonne dans laquelle vous souhaitez placer votre pion");
@@ -69,9 +69,10 @@ public class Game {
 
             if (col > 7 || col < 1) return getPlayerMove(true);
             if (!checkColumn(col)) return getPlayerMove(false);
+            
             return col;
         } else {
-            System.out.println("L'ia joue");
+            System.out.println("L'IA joue");
             Random random = new Random();
             int col = random.nextInt(7) + 1;
             try {

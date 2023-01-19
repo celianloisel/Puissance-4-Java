@@ -33,6 +33,7 @@ public class Game {
         currentPlayer = player1;
     }
 
+    // Démarre le jeu
     public void start() throws IOException {
         grid.displayGrid();
         System.out.println(currentPlayer.getName());
@@ -60,6 +61,7 @@ public class Game {
         }
     }
 
+    // Obtenir le mouvement du joueur (Colonne où il veut jouer)(IA et Humain)
     private int getPlayerMove(boolean error) {
         if (!Objects.equals(currentPlayer.getName(), "ia")) {
             Scanner scan = new Scanner(System.in);
@@ -97,6 +99,7 @@ public class Game {
         return 0;
     }
 
+    // message erreur si colonne pleine
     public boolean checkColumn(int col) {
         if (grid.isFull(col - 1)) {
             System.out.println("La colonne choisie est pleine, veuillez choisir une autre colonne");
@@ -106,6 +109,7 @@ public class Game {
     }
 
 
+    // changer de joueur
     private void switchPlayer() {
         if (currentPlayer == player1) {
             currentPlayer = player2;
@@ -114,6 +118,8 @@ public class Game {
         }
     }
 
+    // Vérifie si 3 pions sont alignés pour bloquer le jouer (NON FONCTIONNELLE)
+    // TODO IA2 a debug
     public int detectAndBlockWin(String opponentColor) {
         // vérifier les alignements horizontaux
         for (int row = 0; row < grid.rows; row++) {

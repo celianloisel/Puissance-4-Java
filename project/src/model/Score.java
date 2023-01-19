@@ -13,6 +13,7 @@ public class Score {
         this.fileName = fileName;
     }
 
+    // afficher le top 10
     public void afficherContenu() {
         List<String[]> data = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
@@ -46,6 +47,7 @@ public class Score {
         }
     }
 
+    // Sauvegarder le score
     public void saveScore(String name, int move) throws IOException {
         int score = 42 - move;
         try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(fileName, true)))) {

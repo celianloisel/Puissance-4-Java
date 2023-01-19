@@ -67,6 +67,7 @@ public class Main {
         }
     }
 
+    // Choisis une couleur automatiquement si une couleur et déja choisis
     private static void choiceColor(boolean isValidInput, Menu menu, Scanner scanner) {
         while (!isValidInput) {
             menu.displayMenu("color");

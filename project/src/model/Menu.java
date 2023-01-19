@@ -18,6 +18,7 @@ public class Menu {
         colors = getColors();
     }
 
+    // Afficher le menu
     public void displayMenu(String choice) {
         if (Objects.equals(choice, "main")) {
             ArrayList<String> menu = new ArrayList<>();

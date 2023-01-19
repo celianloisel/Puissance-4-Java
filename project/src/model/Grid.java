@@ -15,6 +15,7 @@ public class Grid {
     }
 
 
+    // Affiche la grille.
     public void displayGrid() {
         System.out.println(ANSI_YELLOW + "\n⸺⸺⸺⸺ Grille ⸺⸺⸺⸺\n" + ANSI_RESET);
 
@@ -57,6 +58,7 @@ public class Grid {
 
     }
 
+    // Ajouter une piece dans la grille (Seulement la valeur/Ne change pas la grille dans la console en direct)
     public void dropPiece(String color, int column) {
         for (int i = rows - 1; i >= 0; i--) {
             if (grid[i][column - 1] == null) {
@@ -66,6 +68,7 @@ public class Grid {
         }
     }
 
+    // Verifier si la colonne choisie et pleine
     public boolean isFull(int col) {
         for (int i = 0; i < rows; i++) {
             if (grid[i][col] == null || grid[i][col].getColor().equals(" . ")) {
@@ -75,6 +78,7 @@ public class Grid {
         return true;
     }
 
+    // Verifier si le plateau et pleine
     public boolean isFullGrid() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -86,12 +90,13 @@ public class Grid {
         return true;
     }
 
+    // Verifier le gagnant
     public boolean checkForWin() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 Piece currentPiece = grid[i][j];
                 if (currentPiece != null) {
-                    // Check horizontal win
+                    // Verifier 4 pions aligner horizontal
                     if (j <= columns - 4) {
                         if (grid[i][j + 1] != null && grid[i][j + 2] != null && grid[i][j + 3] != null) {
                             if (grid[i][j + 1].getColor().equals(currentPiece.getColor()) && grid[i][j + 2].getColor().equals(currentPiece.getColor()) && grid[i][j + 3].getColor().equals(currentPiece.getColor())) {
@@ -99,7 +104,7 @@ public class Grid {
                             }
                         }
                     }
-                    // Check vertical win
+                    // Verifier 4 pions aligner vertical
                     if (i <= rows - 4) {
                         if (grid[i + 1][j] != null && grid[i + 2][j] != null && grid[i + 3][j] != null) {
                             if (grid[i + 1][j].getColor().equals(currentPiece.getColor()) && grid[i + 2][j].getColor().equals(currentPiece.getColor()) && grid[i + 3][j].getColor().equals(currentPiece.getColor())) {
@@ -107,7 +112,7 @@ public class Grid {
                             }
                         }
                     }
-                    // Check diagonal win (ascending)
+                    // Verifier 4 pions aligner diagonal
                     if (i <= rows - 4 && j <= columns - 4) {
                         if (grid[i + 1][j + 1] != null && grid[i + 2][j + 2] != null && grid[i + 3][j + 3] != null) {
                             if (grid[i + 1][j + 1].getColor().equals(currentPiece.getColor()) && grid[i + 2][j + 2].getColor().equals(currentPiece.getColor()) && grid[i + 3][j + 3].getColor().equals(currentPiece.getColor())) {
@@ -115,7 +120,7 @@ public class Grid {
                             }
                         }
                     }
-// Check diagonal win (descending)
+                    // Verifier 4 pions aligner diagonal
                     if (i <= rows - 4 && j >= 3) {
                         if (grid[i + 1][j - 1] != null && grid[i + 2][j - 2] != null && grid[i + 3][j - 3] != null) {
                             if (grid[i + 1][j - 1].getColor().equals(currentPiece.getColor()) && grid[i + 2][j - 2].getColor().equals(currentPiece.getColor()) && grid[i + 3][j - 3].getColor().equals(currentPiece.getColor())) {

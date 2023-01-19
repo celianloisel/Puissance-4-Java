@@ -1,6 +1,9 @@
 package model;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Score {
 
@@ -11,19 +14,35 @@ public class Score {
     }
 
     public void afficherContenu() {
-        String line = "";
-
+        List<String[]> data = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            String line;
             while ((line = br.readLine()) != null) {
-                // use comma as separator
                 String[] values = line.split(";");
-                for (String value : values) {
+                data.add(values);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Collections.sort(data, (a, b) -> Integer.compare(Integer.parseInt(b[1]), Integer.parseInt(a[1])));
+
+        if (data.size() < 10) {
+            for (int i = 0; i < data.size(); i++) {
+                String[] player = data.get(i);
+                for (String value : player) {
                     System.out.print(value + " ");
                 }
                 System.out.println();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
+            for (int i = 0; i < 10; i++) {
+                String[] player = data.get(i);
+                for (String value : player) {
+                    System.out.print(value + " ");
+                }
+                System.out.println();
+            }
         }
     }
 

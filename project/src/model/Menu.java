@@ -32,7 +32,7 @@ public class Menu {
             }
         } else if (Objects.equals(choice, "color")) {
             ArrayList<String> colorMenu = new ArrayList<>();
-            colorMenu.add("\n>> Choissisez votre couleur :\n");
+            colorMenu.add("\n>> Choisissez votre couleur :\n");
             colorMenu.add(ANSI_YELLOW + "1 ➥ 🟡" + ANSI_RESET);
             colorMenu.add(ANSI_YELLOW + "2 ➥ 🔴" + ANSI_RESET);
 

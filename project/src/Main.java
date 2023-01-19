@@ -30,7 +30,7 @@ public class Main {
 
                         choiceColor(false, menu, scanner);
 
-                        Game gameSolo = new Game(menu.getNumberOfPlayers(), menu.getNames(), menu.getColors());
+                        Game gameSolo = new Game(menu.getNumberOfPlayers(), menu.getNames(), menu.getColors(), 1);
                         gameSolo.start();
 
                         break;
@@ -60,7 +60,7 @@ public class Main {
                         } else {
                             menu.setColors("🔴");
                         }
-                        Game gameMulti = new Game(menu.getNumberOfPlayers(), menu.getNames(), menu.getColors());
+                        Game gameMulti = new Game(menu.getNumberOfPlayers(), menu.getNames(), menu.getColors(), 1);
                         gameMulti.start();
 
                         break;
@@ -86,11 +86,11 @@ public class Main {
             String colorChoice = scanner.nextLine();
             switch (colorChoice) {
                 case "1" -> {
-                    menu.setColors("🔴");
+                    menu.setColors("🟡");
                     isValidInput = true;
                 }
                 case "2" -> {
-                    menu.setColors("🟡");
+                    menu.setColors("🔴");
                     isValidInput = true;
                 }
                 default -> System.out.println("L'option n'existe pas !");
